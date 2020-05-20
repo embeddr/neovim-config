@@ -60,6 +60,9 @@ Plug 'rstacruz/vim-closer'
 " Vim startup menu improvements (recent files, sessions, etc.)
 Plug 'mhinz/vim-startify'
 
+" Gutentags
+Plug 'ludovicchabant/vim-gutentags'
+
 " Initialize plugin system
 call plug#end()
 
@@ -112,13 +115,14 @@ nmap <leader>0 <Plug>BufTabLine.Go(10)
 nmap <leader>- :bprev<CR>
 nmap <leader>= :bnext<CR>
 
-" Hotkey to close current buffer or window
-nmap <leader>q :b#\|bd #<CR>
-nmap <Leader>c :close<CR>
+" Hotkeys to close current buffer or window
+"nmap <leader>q :b#\|bd #<CR>
+nmap <leader>q :enew\|bd #<CR>
+nmap <leader>c :close<CR>
 
 " Hotkeys for FZF file search
-nmap <Leader>f :Files<CR>
-nmap <Leader>g :GFiles<CR>
+nmap <leader>f :Files<CR>
+nmap <leader>g :GFiles<CR>
 
 " Enable escape to exit terminal mode 
 tnoremap <Esc> <C-\><C-n>
@@ -126,9 +130,10 @@ tnoremap <Esc> <C-\><C-n>
 " Highlight the selected line when in insert mode
 :autocmd InsertEnter,InsertLeave * set cul!
 
-" Map shift-tab to un-indent in both normal and insert modes
+" Have tab/shift-tab indent and unindent in normal and insert modes
 nnoremap <S-Tab> <<
 inoremap <S-Tab> <C-d>
+nnoremap <Tab> >>
 
 " Enable hybrid line numbers by default
 set nu rnu
