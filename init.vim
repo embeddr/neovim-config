@@ -135,6 +135,10 @@ nnoremap <S-Tab> <<
 inoremap <S-Tab> <C-d>
 nnoremap <Tab> >>
 
+" Use ctrl-j/k to navigate autocompletion menus
+inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "<c-j>"
+inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "<c-k>"
+
 " Enable hybrid line numbers by default
 set nu rnu
 
