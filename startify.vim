@@ -1,5 +1,7 @@
 " Startify configuration
-" Set custom header to the latest ZOOX logo
+
+" Do not change to the directory of a file/bookmark when opening
+let g:startify_change_to_dir = 0
 
 " Set startify lists
 let g:startify_lists = [
@@ -11,11 +13,40 @@ let g:startify_lists = [
 " Set startify bookmarks
 let g:startify_bookmarks = [ 
       \ '~/.config/nvim/init.vim',
-      \ '~/Work/',
-      \ '~/Work/practice',
-      \ '~/Work/stm32f3discovery/test_project',
+      \ '~/.config/nvim/lua/user/',
+      \ '~/Work/repos/driving',
+      \ '~/Work/repos/driving/firmware/',
+      \ '~/Work/repos/driving/vehicle/',
       \ ]
 
 " Other startify settings
 let g:startify_enable_special = 0
 let g:startify_padding_left = 8
+let g:startify_custom_footer = [
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ '',
+      \ ]
