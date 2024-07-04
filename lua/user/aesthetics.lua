@@ -10,7 +10,7 @@ vim.g.everforest_background = 'medium'
 vim.g.everforest_better_performance = true
 
 -- Notification display plugin
-vim.notify = require("notify")
+vim.notify = require'notify'
 
 -- Override encoding to only display if encoding isn't UTF-8.
 local encoding = function()
@@ -24,15 +24,12 @@ local fileformat = function()
   return ret
 end
 
--- Navic provides code structure context at current line (e.g. namespace > class::method)
-local navic = require('nvim-navic')
-
-require('lualine').setup({
+require'lualine'.setup {
   options = {
     theme = 'everforest',
   },
   sections = {
-    -- Omit diagnostics from section b (originally 3rd component)
+    -- Omit diagnostics from section b (3rd component by default)
     lualine_b = { 'branch', 'diff', '' },
     -- Display file path relative to working directory
     lualine_c = {
@@ -50,13 +47,13 @@ require('lualine').setup({
     lualine_a = { 'filename' },
     lualine_c = {
       -- Display code context with navic, if available
-      { navic.get_location, cond = navic.is_available }
+      -- Note: Can also define a function that invokes navic.get_location()
+      {
+        'navic',
+      }
     },
   },
   inactive_winbar = {
     lualine_b = { 'filename' },
   }
-})
-
--- Navic is setup here, but also must be attached in LSP setup
-navic.setup()
+}

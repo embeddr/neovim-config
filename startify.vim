@@ -14,9 +14,7 @@ let g:startify_lists = [
 let g:startify_bookmarks = [ 
       \ '~/.config/nvim/init.vim',
       \ '~/.config/nvim/lua/user/',
-      \ '~/Work/repos/driving',
-      \ '~/Work/repos/driving/firmware/',
-      \ '~/Work/repos/driving/vehicle/',
+      \ '~/Work/',
       \ ]
 
 " Other startify settings

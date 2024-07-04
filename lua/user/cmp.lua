@@ -1,13 +1,14 @@
 -- Set up nvim-cmp.
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
-local cmp = require('cmp')
-local luasnip = require('luasnip')
 
-cmp.setup({
+require'luasnip'
+local cmp = require'cmp'
+
+cmp.setup {
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      require'luasnip'.lsp_expand(args.body)
     end,
   },
   window = {
@@ -23,7 +24,7 @@ cmp.setup({
     ['<C-j>'] = cmp.mapping.select_next_item(),
     -- Accept currently selected item.
     -- Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), 
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp', keyword_length = 3 },
@@ -31,4 +32,4 @@ cmp.setup({
     { name = 'path', keywrod_length = 2 },
     { name = 'buffer', keywrod_length = 2 },
   })
-})
+}

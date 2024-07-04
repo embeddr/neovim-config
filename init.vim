@@ -14,6 +14,7 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 " LSP
+" Mason provides automatic download and setup of LSP servers
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
@@ -29,14 +30,8 @@ Plug 'L3MON4D3/LuaSnip'
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
-" Fuzzy finder
-" Fuzzy search tool, provides easy mechanism for finding files
-" Note: this will download and install fzf and enable it for nvim
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
-
 " Ripgrep
-" Very fast grep tool wrftten in rust
+" Very fast grep tool written in rust
 " Note: Ripgrep must be installed separately; can use cargo
 Plug 'jremmen/vim-ripgrep'
 
@@ -59,7 +54,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-"Plug 'nvim-telescope/telescope-fzf-native.vim'
 
 " Vim-floaterm
 " Floating terminal (rather than managing a terminal in a pane)
@@ -78,18 +72,16 @@ Plug 'tpope/vim-rhubarb'
 " Helper for abbreviation, substitution, and coercion
 Plug 'tpope/vim-abolish'
 
-" Git conflict marker
-Plug 'rhysd/conflict-marker.vim'
-
 " GitGutter
 " Shows git changes in column to the left of line numbers
 Plug 'airblade/vim-gitgutter'
 
 " Closer
 " Plugin for conservative bracket closing (inserts on enter only)
-" Plug 'rstacruz/vim-closer'
-" Using an alternative that fixes a bug (inserts an extra bracket per buffer)
-Plug 'KermitPurple/vim-closer'
+Plug 'rstacruz/vim-closer'
+
+" Mako plugins
+Plug 'sophacles/vim-bundle-mako'
 
 " Startify
 " Vim startup menu improvements (recent files, sessions, etc.)
@@ -185,11 +177,11 @@ if !empty(glob('$HOME/.config/nvim/startify.vim'))
 endif
 
 " Lua user configs
-lua require('user.aesthetics')
-lua require('user.autocmds')
-lua require('user.buffers')
-lua require('user.cmp')
-lua require('user.lsp')
-lua require('user.options')
-lua require('user.telescope')
-lua require('user.treesitter')
+lua require'user.aesthetics'
+lua require'user.autocmds'
+lua require'user.buffers'
+lua require'user.cmp'
+lua require'user.lsp'
+lua require'user.options'
+lua require'user.telescope'
+lua require'user.treesitter'

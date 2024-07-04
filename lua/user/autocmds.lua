@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd(
   }
 )
 
--- Exit insert mode when entering new window
+-- Exit insert mode when leaving a window
 vim.api.nvim_create_autocmd(
   { 'WinLeave' },
   { command = 'stopinsert' }
