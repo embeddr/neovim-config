@@ -51,3 +51,20 @@ vim.api.nvim_create_autocmd(
   { command = 'set nocul' }
 )
 
+-- Treat CMakeLists files with any extension as cmake files
+vim.api.nvim_create_autocmd(
+  { 'BufRead', 'BufNewFile' }, {
+    pattern = 'CMakeLists*',
+    command = 'set filetype=cmake'
+  }
+)
+vim.api.nvim_create_autocmd(
+  { 'User' }, {
+    pattern = 'TelescopePreviewerLoaded',
+    callback = function(args)
+      if args.data.bufname:match("CMakeLists*") then
+        vim.cmd('set filetype=cmake')
+      end
+    end,
+  }
+)

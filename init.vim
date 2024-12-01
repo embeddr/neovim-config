@@ -52,12 +52,15 @@ Plug 'kyazdani42/nvim-web-devicons'
 " Note: Ripgrep must be installed separately; can use cargo
 " Note: File browser optionally uses fd, which must be installed separately
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim', " { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 " Vim-floaterm
 " Floating terminal (rather than managing a terminal in a pane)
 Plug 'voldikss/vim-floaterm'
+
+" Hex editor
+Plug 'RaafatTurki/hex.nvim'
 
 " Notify
 Plug 'rcarriga/nvim-notify'
@@ -65,8 +68,11 @@ Plug 'rcarriga/nvim-notify'
 " Git helpers by tpope
 " General git command support
 Plug 'tpope/vim-fugitive'
+
 " GitHub integration (e.g. open permalink)
 Plug 'tpope/vim-rhubarb'
+" Similar GitLab integration
+"Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Abolish
 " Helper for abbreviation, substitution, and coercion
@@ -115,8 +121,9 @@ let g:smoothie_experimental_mappings=v:true
 " Configure floaterm
 let g:floaterm_width = 0.8
 
-" Set GitHub enterprise url for vim-rhubarb
-let g:github_enterprise_urls = ['https://git.zooxlabs.com']
+" Set GitHub/GitLab domains in non-tracked init file
+"let g:github_enterprise_urls = ['https://my-github']
+"let g:fugitive_gitlab_domains = ['https://my-gitlab']
 
 " Key bindings -----------------------------------------------------------------
 
@@ -183,5 +190,6 @@ lua require'user.buffers'
 lua require'user.cmp'
 lua require'user.lsp'
 lua require'user.options'
+lua require'user.plugins'
 lua require'user.telescope'
 lua require'user.treesitter'

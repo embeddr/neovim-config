@@ -59,6 +59,15 @@ local capabilities = vim.tbl_deep_extend(
 lspconfig['clangd'].setup {
     on_attach = on_attach,
     capabilities = capabilities,
+    filetypes = { "c", "cpp" }, -- exclude proto, which is enabled by default
+}
+lspconfig['cmake'].setup {
+    on_attach = on_attach,
+    filetypes = { "cmake", "txt_nix" },
+}
+lspconfig['rust_analyzer'].setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
 }
 lspconfig['jsonls'].setup {
     on_attach = on_attach,

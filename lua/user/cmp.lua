@@ -27,9 +27,9 @@ cmp.setup {
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp', keyword_length = 3 },
+    { name = 'buffer', keyword_length = 2 },
     { name = 'luasnip', keyword_length = 3 },
-    { name = 'path', keywrod_length = 2 },
-    { name = 'buffer', keywrod_length = 2 },
+    { name = 'nvim_lsp', keyword_length = 3 },
+    { name = 'path', keyword_length = 2 },
   })
 }
