@@ -24,3 +24,6 @@ You will need to use Mason to install LSP servers. Recommendations:
 - `clangd`
 - `pyright`
 
+
+### Maintenance
+If encountering errors while using Telescope, try running `TSUpdate` from within Neovim.
