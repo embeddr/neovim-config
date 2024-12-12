@@ -97,6 +97,9 @@ Plug 'mhinz/vim-startify'
 " Smooth scrolling with default Vim movement
 Plug 'psliwka/vim-smoothie'
 
+" Smear cursor effect
+Plug 'sphamba/smear-cursor.nvim'
+
 " Color Schemes
 Plug 'sainnhe/everforest'
 Plug 'morhetz/gruvbox'
