@@ -20,9 +20,9 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 
 " Autocompletion
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/nvim-cmp'
 
 " Snippet engine (needed for nvim-cmp)
 Plug 'L3MON4D3/LuaSnip'
@@ -69,10 +69,9 @@ Plug 'rcarriga/nvim-notify'
 " General git command support
 Plug 'tpope/vim-fugitive'
 
-" GitHub integration (e.g. open permalink)
+" GitHub and GitLab integration (e.g. open permalink)
 Plug 'tpope/vim-rhubarb'
-" Similar GitLab integration
-"Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Abolish
 " Helper for abbreviation, substitution, and coercion
@@ -85,9 +84,6 @@ Plug 'airblade/vim-gitgutter'
 " Closer
 " Plugin for conservative bracket closing (inserts on enter only)
 Plug 'rstacruz/vim-closer'
-
-" Mako plugins
-Plug 'sophacles/vim-bundle-mako'
 
 " Startify
 " Vim startup menu improvements (recent files, sessions, etc.)
@@ -141,31 +137,22 @@ map <leader>t :FloatermToggle<CR>
 " Unmap q to prevent recording
 map q <Nop>
 
-" Toggline line wrap on the current buffer
+" Toggle line wrap on the current buffer
 nmap <leader>w :set wrap!<CR>
 
 " Use <leader>-num to open the corresponding (ordinal) buffer number
-nmap <leader>1 <Plug>BufTabLine.Go(1)
-nmap <leader>2 <Plug>BufTabLine.Go(2)
-nmap <leader>3 <Plug>BufTabLine.Go(3)
-nmap <leader>4 <Plug>BufTabLine.Go(4)
-nmap <leader>5 <Plug>BufTabLine.Go(5)
-nmap <leader>6 <Plug>BufTabLine.Go(6)
-nmap <leader>7 <Plug>BufTabLine.Go(7)
-nmap <leader>8 <Plug>BufTabLine.Go(8)
-nmap <leader>9 <Plug>BufTabLine.Go(9)
-nmap <leader>0 <Plug>BufTabLine.Go(10)
+for i in range(1, 9)
+  execute 'nnoremap <leader>' . i . ' <Plug>BufTabLine.Go(' . i . ')'
+endfor
+nnoremap <leader>0 <Plug>BufTabLine.Go(10)
 
 " Go to previous/next buffer
-nmap <leader>- :bprev<CR>
-nmap <leader>= :bnext<CR>
+nnoremap - :bprev<CR>
+nnoremap = :bnext<CR>
 
 " Get link to open file/selection on GitHub
 nmap <leader>b :GBrowse<CR>
 vmap <leader>b :GBrowse<CR>
-
-" Clear search highlighting by hitting return
-nnoremap <CR> :noh<CR><CR>
 
 " Enable escape to exit terminal mode 
 tnoremap <Esc> <C-\><C-n>
