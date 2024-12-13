@@ -12,6 +12,17 @@ vim.g.everforest_better_performance = true
 -- Notification display plugin
 vim.notify = require'notify'
 
+-- Cleaner inline diagnostics
+vim.diagnostic.config({virtual_text = false})
+require'tiny-inline-diagnostic'.setup({
+  preset = "powerline",
+  options = {
+    show_source = true,
+    multiple_diag_under_cursor = true,
+    multilines = true,
+  }
+})
+
 -- Override encoding to only display if encoding isn't UTF-8.
 local encoding = function()
   local ret, _ = (vim.bo.fenc or vim.go.enc):gsub("^utf%-8$", "")

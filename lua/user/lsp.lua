@@ -18,9 +18,9 @@ local navic = require'nvim-navic'
 -- Mappings
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+--vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev({float = false}) end, opts)
+vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({float = false}) end, opts)
 
 -- Function to be invoked when LSP client attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -34,11 +34,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-
-  -- Hide initial diagnostics from clangd when attaching to buffer
-  if client.name == 'clangd' then
-    vim.diagnostic.hide()
-  end
 
   -- Attach navic if capable (provides code context in winbar)
   if client.server_capabilities.documentSymbolProvider then

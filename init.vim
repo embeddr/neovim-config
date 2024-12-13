@@ -45,6 +45,9 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'SmiteshP/nvim-navic'
 Plug 'kyazdani42/nvim-web-devicons'
 
+" Clean up inline diagnostics
+Plug 'rachartier/tiny-inline-diagnostic.nvim'
+
 " Telescope
 " Note: Ripgrep must be installed separately; can use cargo
 " Note: File browser optionally uses fd, which must be installed separately
