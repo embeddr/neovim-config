@@ -24,9 +24,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 
-" Snippet engine (needed for nvim-cmp)
-Plug 'L3MON4D3/LuaSnip'
-
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 

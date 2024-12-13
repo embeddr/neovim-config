@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd(
   }
 )
 
--- Dine comment insertion for select languages
+-- Disable comment insertion for select languages
 -- Note: Not using formatoptions because I *do* want block comments to be inserted
 vim.api.nvim_create_autocmd(
   { 'FileType' },
@@ -52,6 +52,7 @@ vim.api.nvim_create_autocmd(
 )
 
 -- Treat CMakeLists files with any extension as cmake files
+-- This is to get expected syntax highlighting with nix nonsense...
 vim.api.nvim_create_autocmd(
   { 'BufRead', 'BufNewFile' }, {
     pattern = 'CMakeLists*',

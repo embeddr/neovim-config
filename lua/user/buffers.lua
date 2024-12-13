@@ -44,7 +44,18 @@ vim.keymap.set(
 
 -- Close the current window or quit if it's the last window
 local close_or_quit = function()
-  if #vim.api.nvim_list_wins() == 1 then
+  local win_list = vim.api.nvim_tabpage_list_wins(0)
+  local visible_windows = 0
+
+  -- Filter for non-floating windows
+  for _, win in ipairs(win_list) do
+    local config = vim.api.nvim_win_get_config(win)
+    if not config.relative or config.relative == '' then
+      visible_windows = visible_windows + 1
+    end
+  end
+
+  if visible_windows == 1 then
     vim.cmd('confirm qall')
   else
     vim.api.nvim_win_close(0, true)

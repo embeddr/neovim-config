@@ -1,14 +1,12 @@
 -- Set up nvim-cmp.
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
-require'luasnip'
 local cmp = require'cmp'
 
 cmp.setup {
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      require'luasnip'.lsp_expand(args.body)
+      vim.snippet.expand(args.body) -- now using native snippet engine
     end,
   },
   window = {
@@ -28,7 +26,6 @@ cmp.setup {
   }),
   sources = cmp.config.sources({
     { name = 'buffer', keyword_length = 2 },
-    { name = 'luasnip', keyword_length = 3 },
     { name = 'nvim_lsp', keyword_length = 3 },
     { name = 'path', keyword_length = 2 },
   })
