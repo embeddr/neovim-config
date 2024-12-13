@@ -104,6 +104,27 @@ Plug 'folke/tokyonight.nvim'
 " Initialize plugin system
 call plug#end()
 
+function! CheckPluginsInstalled() abort
+  if !exists('g:plugs')
+    return v:false
+  endif
+
+  for name in keys(g:plugs)
+    let plugin_dir = g:plugs[name].dir
+    if empty(glob(plugin_dir))
+      return v:false
+    endif
+  endfor
+  return v:true
+endfunction
+
+if !CheckPluginsInstalled()
+  echom "Plugins missing. Installing..."
+  silent! PlugInstall
+  echom "New plugins installed."
+  silent! PlugInstall
+endif
+
 " User Settings ----------------------------------------------------------------
 
 " BufTabLine configuration
