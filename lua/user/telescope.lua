@@ -5,6 +5,14 @@ local fb_actions = telescope.extensions.file_browser.actions
 
 telescope.setup {
  defaults = {
+   theme = "dropdown",
+   layout_strategy = "vertical",
+   layout_config = {
+      prompt_position = "top",
+      vertical = {
+        mirror = true,
+      },
+   },
    mappings = {
      i = {
        -- Send selection (or everything, if no selection) to quickfix list and open it
@@ -51,5 +59,18 @@ vim.keymap.set('n', '<leader>V', ":Telescope file_browser<CR> --hidden")
 local builtin = require'telescope.builtin'
 vim.keymap.set('n', '<leader>f', builtin.git_files, {})
 vim.keymap.set('n', '<leader>F', builtin.find_files, {})
+
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
+
+vim.keymap.set('n', '<leader>s', function()
+  builtin.lsp_document_symbols({
+    ignore_symbols = "variable",
+    initial_mode = "normal",
+  })
+end, {})
+vim.keymap.set('n', '<leader>S', function()
+  builtin.lsp_document_symbols({
+    initial_mode = "normal",
+  })
+end, {})
 
