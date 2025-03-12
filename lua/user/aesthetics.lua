@@ -5,9 +5,15 @@ vim.opt.termguicolors = true           -- Enable 24-bit RGB color in terminal in
 vim.opt.background = 'dark'            -- Set background light/dark
 
 -- Set everforest colorscheme and options
-vim.cmd 'colorscheme everforest'
 vim.g.everforest_background = 'medium'
 vim.g.everforest_better_performance = true
+vim.g.everforest_dim_inactive_windows = false
+vim.g.everforest_ui_contrast = 'low'
+vim.g.everforest_colors_override = {
+  bg0 = {'#31383D', '234'},
+  bg1 = {'#31383D', '234'},
+}
+vim.cmd 'colorscheme everforest'
 
 -- Notification display plugin
 vim.notify = require'notify'
