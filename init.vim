@@ -27,6 +27,9 @@ Plug 'hrsh7th/cmp-path'
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
+" Bad habit notifier
+Plug 'm4xshen/hardtime.nvim'
+
 " Ripgrep
 " Very fast grep tool written in rust
 " Note: Ripgrep must be installed separately; can use cargo
@@ -213,7 +216,7 @@ lua require'user.autocmds'
 lua require'user.buffers'
 lua require'user.cmp'
 lua require'user.lsp'
+lua require'user.misc_plugins'
 lua require'user.options'
-lua require'user.plugins'
 lua require'user.telescope'
 lua require'user.treesitter'
