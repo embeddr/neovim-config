@@ -13,6 +13,9 @@ endif
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Mini
+Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
+
 " LSP
 " Mason provides automatic download and setup of LSP servers
 Plug 'williamboman/mason.nvim'
