@@ -30,7 +30,6 @@ o.hidden = true                        -- Allow buffers to remain open in the ba
 o.mouse = 'a'                          -- Enable mouse in all modes
 
 -- Note: install xclip (or similar) for local clipboard support
--- Note: install lemonade (or similar) for remote clipboard support
 o.clipboard:append('unnamedplus')
 
 -- Offsets
@@ -38,7 +37,7 @@ o.cmdheight = 1                        -- Number of extra rows to insert below t
 o.scrolloff = 5                        -- Minimum number of lines to keep above/below cursor
 o.sidescrolloff = 2                    -- Minimum number of columns to keep left/right of the cursor
 
--- Editor 
+-- Editor
 o.showmode = false                     -- Show Insert/Replace/Visual mode display?
 o.number = true                        -- Precede each line with its line number?
 o.relativenumber = true                -- Use relative line numbers for all except the selected line

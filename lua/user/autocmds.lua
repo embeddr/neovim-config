@@ -1,4 +1,15 @@
 -- Autocommands
+
+-- Allow yanking over OSC52
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    -- Use the unnamed register instead of +
+    if vim.v.event.operator == "y" and vim.v.event.regname == "" then
+      require("osc52").copy_register('"')  -- this copies whatever was yanked normally
+    end
+  end,
+})
+
 -- Disable relative line numbers when in insert mode
 vim.api.nvim_create_augroup('relativenumber_toggle', { clear = true })
 vim.api.nvim_create_autocmd(

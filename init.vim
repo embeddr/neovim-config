@@ -33,6 +33,10 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 " Bad habit notifier
 Plug 'm4xshen/hardtime.nvim'
 
+" OSC52 for remote yank
+" Neovim 0.10+ has native OSC52 support, so explore removing this sometime
+Plug 'ojroques/nvim-osc52'
+
 " Ripgrep
 " Very fast grep tool written in rust
 " Note: Ripgrep must be installed separately; can use cargo
