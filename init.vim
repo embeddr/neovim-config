@@ -125,6 +125,19 @@ if !CheckPluginsInstalled()
   silent! PlugInstall
 endif
 
+" Find shell -------------------------------------------------------------------
+
+function! FindShell()
+  for s in ['zsh', 'bash', 'sh']
+    if executable(s)
+      return exepath(s)
+    endif
+  endfor
+  return ''
+endfunction
+
+let &shell = FindShell()
+
 " User Settings ----------------------------------------------------------------
 
 " BufTabLine configuration
