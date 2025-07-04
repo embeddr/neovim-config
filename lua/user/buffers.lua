@@ -1,5 +1,37 @@
 -- Buffer-related setup
 
+-- Display buffer info in tabline
+require("bufferline").setup {
+  options = {
+    -- numbers = "ordinal",
+    numbers = function(opts)
+      return tostring(opts.ordinal) .. " "
+    end,
+    diagnostics = "nvim_lsp", -- optional
+    enforce_regular_tabs = false,
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    separator_style = {"", ""},
+    max_name_length = 30,
+    max_prefix_length = 30,
+    truncate_names = true,
+    path = "relative",
+  },
+  highlights = {
+    buffer_selected = {
+      bold = true,
+      italic = false,
+    },
+  },
+}
+
+-- Hotkeys to focus on buffer by ordinal number
+for i = 1,9 do
+  vim.keymap.set("n", "<leader>"..i, function()
+    require("bufferline").go_to_buffer(i, true)
+  end, { noremap = true, silent = true })
+end
+
 -- Plugin for clean buffer closing (e.g. not closing window)
 local close_buffers = require'close_buffers'
 close_buffers.setup {

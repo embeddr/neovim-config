@@ -39,9 +39,8 @@ Plug 'ojroques/nvim-osc52'
 " Note: Ripgrep must be installed separately; can use cargo
 Plug 'jremmen/vim-ripgrep'
 
-" BufTabLine
-" Displays buffer names in the tab line for convenience
-Plug 'ap/vim-buftabline'
+" Display buffer info in tabline
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 " Buffer deletion helpers
 " Prevents issues like windows closing when buffers are deleted
@@ -147,21 +146,13 @@ let &shell = FindShell()
 
 " User Settings ----------------------------------------------------------------
 
-" BufTabLine configuration
-" Always show buffers in tab
-let g:buftabline_show=2
-" Show ordinal buffer numbers
-let g:buftabline_numbers=2
-" Show status indicator
-let g:buftabline_indicators=1
-
 " Add experimental mappings for Vim-Smoothie (e.g. G/gg)let
 let g:smoothie_experimental_mappings=v:true
 
 " Configure floaterm
 let g:floaterm_width = 0.8
 
-" Set GitHub/GitLab domains in non-tracked init file
+" Set GitHub/GitLab enterprise domains in a non-tracked file
 "let g:github_enterprise_urls = ['https://my-github']
 "let g:fugitive_gitlab_domains = ['https://my-gitlab']
 

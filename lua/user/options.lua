@@ -10,7 +10,7 @@ o.autoindent = true                    -- Maintain indentation on new lines?
 o.copyindent = true                    -- Use the existing indentation characters?
 
 -- Line wrap
-o.wrap = false                         -- Wrap long lines by default?
+o.wrap = true                          -- Wrap long lines by default?
 o.linebreak = true                     -- Break lines on whitespace word boundaries
 o.breakindent = true                   -- Indent wrapped lines to match the original line?
 o.breakindentopt = 'sbr'               -- Options for wrapped line indentation (sbr = showbreak)

@@ -1,5 +1,15 @@
 -- Autocommands
 
+-- Mark help buffers as listed so they're treated consistently
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*.txt",
+  callback = function()
+    if vim.bo.filetype == "help" then
+      vim.bo.buflisted = true
+    end
+  end,
+})
+
 -- Allow yanking over OSC52
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
