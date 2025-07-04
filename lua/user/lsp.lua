@@ -6,7 +6,7 @@ if not status_ok then
 end
 
 require'mason'.setup {
-  log_level = vim.log.levels.debug
+  log_level = vim.log.levels.ERROR
 }
 
 require'mason-lspconfig'.setup {
@@ -43,11 +43,9 @@ end
 
 -- Register on_attach function for desired servers
 local lspconfig = require'lspconfig'
-local lsp_defaults = lspconfig.util.default_config
-
 local capabilities = vim.tbl_deep_extend(
   'force',
-  lsp_defaults.capabilities,
+  lspconfig.util.default_config,
   require'cmp_nvim_lsp'.default_capabilities()
 )
 
@@ -64,7 +62,9 @@ lspconfig['jsonls'].setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
-lspconfig['lua_ls'].setup {
+-- NOTE: I ran into issues trying to convert everything else to use
+-- this new API, so I'm only doing it for lua_ls for now...
+vim.lsp.config('lua_ls', {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -80,12 +80,9 @@ lspconfig['lua_ls'].setup {
           library = vim.api.nvim_get_runtime_file("", true),
           checkThirdParty = false,
         },
-        telemetry = {
-          enable = false,
-        }
       },
     },
-}
+})
 lspconfig['pyright'].setup {
     on_attach = on_attach,
     capabilities = capabilities,
