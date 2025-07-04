@@ -59,9 +59,7 @@ vim.keymap.set('n', '<leader>V', ":Telescope file_browser<CR> --hidden")
 local builtin = require'telescope.builtin'
 vim.keymap.set('n', '<leader>f', builtin.git_files, {})
 vim.keymap.set('n', '<leader>F', builtin.find_files, {})
-
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
-
 vim.keymap.set('n', '<leader>s', function()
   builtin.lsp_document_symbols({
     ignore_symbols = "variable",

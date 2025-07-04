@@ -186,7 +186,7 @@ nnoremap = :bnext<CR>
 nmap <leader>b :GBrowse<CR>
 vmap <leader>b :GBrowse<CR>
 
-" Enable escape to exit terminal mode 
+" Enable escape to exit terminal mode
 tnoremap <Esc> <C-\><C-n>
 
 " Have tab/shift-tab indent and unindent in normal and insert modes
