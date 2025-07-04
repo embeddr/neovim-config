@@ -1,7 +1,8 @@
 -- Buffer-related setup
 
 -- Display buffer info in tabline
-require("bufferline").setup {
+local bufferline = require'bufferline'
+bufferline.setup {
   options = {
     -- numbers = "ordinal",
     numbers = function(opts)
@@ -28,7 +29,7 @@ require("bufferline").setup {
 -- Hotkeys to focus on buffer by ordinal number
 for i = 1,9 do
   vim.keymap.set("n", "<leader>"..i, function()
-    require("bufferline").go_to_buffer(i, true)
+    bufferline.go_to_buffer(i, true)
   end, { noremap = true, silent = true })
 end
 

@@ -10,6 +10,14 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   end,
 })
 
+-- Same for startify
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "startify",
+  callback = function()
+    vim.opt_local.buflisted = true
+  end,
+})
+
 -- Allow yanking over OSC52
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()

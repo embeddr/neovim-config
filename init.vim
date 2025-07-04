@@ -61,9 +61,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', " { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
-" Vim-floaterm
-" Floating terminal (rather than managing a terminal in a pane)
-Plug 'voldikss/vim-floaterm'
+" Floating terminal
+Plug 'nvzone/volt'
+Plug 'nvzone/floaterm'
 
 " Hex editor
 Plug 'RaafatTurki/hex.nvim'
@@ -149,9 +149,6 @@ let &shell = FindShell()
 " Add experimental mappings for Vim-Smoothie (e.g. G/gg)let
 let g:smoothie_experimental_mappings=v:true
 
-" Configure floaterm
-let g:floaterm_width = 0.8
-
 " Set GitHub/GitLab enterprise domains in a non-tracked file
 "let g:github_enterprise_urls = ['https://my-github']
 "let g:fugitive_gitlab_domains = ['https://my-gitlab']
@@ -161,10 +158,6 @@ let g:floaterm_width = 0.8
 " Use ctrl-j/k to scroll up/down
 nnoremap <C-k> <cmd>call smoothie#do("\<C-U>") <CR>
 nnoremap <C-j> <cmd>call smoothie#do("\<C-D>") <CR>
-
-" Open new terminal or toggle existing terminal
-nmap <leader>t :FloatermToggle<CR>
-map <leader>t :FloatermToggle<CR>
 
 " Unmap q to prevent recording
 map q <Nop>
@@ -214,4 +207,5 @@ lua require'user.lsp'
 lua require'user.misc_plugins'
 lua require'user.options'
 lua require'user.telescope'
+lua require'user.terminal'
 lua require'user.treesitter'
