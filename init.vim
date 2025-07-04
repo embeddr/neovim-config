@@ -30,9 +30,6 @@ Plug 'hrsh7th/cmp-path'
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
-" Bad habit notifier
-Plug 'm4xshen/hardtime.nvim'
-
 " OSC52 for remote yank
 " Neovim 0.10+ has native OSC52 support, so explore removing this sometime
 Plug 'ojroques/nvim-osc52'

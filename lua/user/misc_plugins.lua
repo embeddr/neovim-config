@@ -1,8 +1,5 @@
 -- Misc plugins
 
-require'hardtime'.setup({
-  disable_mouse = false,
-})
 require'hex'.setup()
 require'mini.trailspace'.setup()
 require('osc52').setup {
