@@ -165,12 +165,6 @@ map q <Nop>
 " Toggle line wrap on the current buffer
 nmap <leader>w :set wrap!<CR>
 
-" Use <leader>-num to open the corresponding (ordinal) buffer number
-for i in range(1, 9)
-  execute 'nnoremap <leader>' . i . ' <Plug>BufTabLine.Go(' . i . ')'
-endfor
-nnoremap <leader>0 <Plug>BufTabLine.Go(10)
-
 " Go to previous/next buffer
 nnoremap - :bprev<CR>
 nnoremap = :bnext<CR>

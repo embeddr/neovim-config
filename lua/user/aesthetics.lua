@@ -46,8 +46,6 @@ require'lualine'.setup {
     theme = 'everforest',
   },
   sections = {
-    -- Omit diagnostics from section b (3rd component by default)
-    lualine_b = { 'branch', 'diff', '' },
     -- Display file path relative to working directory
     lualine_c = {
       { 'filename', path = 1 },
