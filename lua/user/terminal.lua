@@ -12,18 +12,11 @@ floaterm.setup {
       end
       -- Exit cleanly on escape
       map("n", "<Esc>", "<Cmd>FloatermToggle<CR>")
-      -- Allow ctrl-j/k to cycle terms
-      map({"t", "n"}, "<C-j>", function()
+      -- Allow =/- to cycle terms in normal mode (only)
+      map("n", "=", function()
         floaterm_api.cycle_term_bufs "next"
       end)
-      map({"t", "n"}, "<C-k>", function()
-        floaterm_api.cycle_term_bufs "prev"
-      end)
-      -- Allow =/- to cycle terms
-      map({"t", "n"}, "=", function()
-        floaterm_api.cycle_term_bufs "next"
-      end)
-      map({"t", "n"}, "-", function()
+      map("n", "-", function()
         floaterm_api.cycle_term_bufs "prev"
       end)
       -- Remap leader-N to jump to the Nth terminal

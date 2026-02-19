@@ -22,6 +22,10 @@ Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 
+" AI integration
+Plug 'zbirenbaum/copilot.lua'
+Plug 'olimorris/codecompanion.nvim'
+
 " Autocompletion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -174,12 +178,11 @@ nmap <leader>b :GBrowse<CR>
 vmap <leader>b :GBrowse<CR>
 
 " Enable escape to exit terminal mode
+" TODO: Put this in custom binding for floaterm?
 tnoremap <Esc> <C-\><C-n>
 
-" Have tab/shift-tab indent and unindent in normal and insert modes
-nnoremap <S-Tab> <<
+" Have shift-tab unindent in insert mode
 inoremap <S-Tab> <C-d>
-nnoremap <Tab> >>
 
 " Use ctrl-j/k to navigate autocompletion menus
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "<c-j>"
@@ -194,6 +197,7 @@ endif
 
 " Lua user configs
 lua require'user.aesthetics'
+lua require'user.ai'
 lua require'user.autocmds'
 lua require'user.buffers'
 lua require'user.cmp'
