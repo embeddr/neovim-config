@@ -20,7 +20,8 @@ Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
 " Mason provides automatic download and setup of LSP servers
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
+" TODO: Update config to support newer version
+Plug 'neovim/nvim-lspconfig', { 'tag': 'v2.5.0' }
 
 " AI integration
 Plug 'zbirenbaum/copilot.lua'
@@ -32,7 +33,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 
 " Treesitter
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'master', 'do': ':TSUpdate' }
 
 " OSC52 for remote yank
 " Neovim 0.10+ has native OSC52 support, so explore removing this sometime
@@ -201,6 +202,7 @@ lua require'user.ai'
 lua require'user.autocmds'
 lua require'user.buffers'
 lua require'user.cmp'
+lua require'user.filetypes'
 lua require'user.lsp'
 lua require'user.misc_plugins'
 lua require'user.options'
