@@ -12,7 +12,7 @@ let g:startify_lists = [
 
 " Set startify bookmarks
 let g:startify_bookmarks = [ 
-      \ '~/.config/nvim/init.vim',
+      \ '~/.config/nvim/init.lua',
       \ '~/.config/nvim/lua/user/',
       \ '~/Work/',
       \ ]

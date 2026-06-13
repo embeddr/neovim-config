@@ -1,7 +1,7 @@
 # Ethan's Neovim Configuration
 
 ## Requirements
-Recommend using the latest stable Neovim version available. Some plugins may not function correctly with older versions.
+Requires Neovim 0.12 or newer for the built-in `vim.pack` plugin manager. Some plugins may not function correctly with older versions.
 
 ###  Prerequisites
 - `ripgrep` must be installed for `vim-ripgrep` (i.e. `:Rg`) to work
@@ -21,4 +21,6 @@ You will need to use Mason to install LSP servers. Recommendations:
 
 
 ### Maintenance
+Use `:packupdate` to update plugins managed by `vim.pack`.
+
 If encountering errors while using Telescope, try running `TSUpdate` from within Neovim.
