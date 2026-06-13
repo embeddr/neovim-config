@@ -23,10 +23,6 @@ Plug 'williamboman/mason-lspconfig.nvim'
 " TODO: Update config to support newer version
 Plug 'neovim/nvim-lspconfig', { 'tag': 'v2.5.0' }
 
-" AI integration
-Plug 'zbirenbaum/copilot.lua'
-Plug 'olimorris/codecompanion.nvim'
-
 " Autocompletion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -198,7 +194,6 @@ endif
 
 " Lua user configs
 lua require'user.aesthetics'
-lua require'user.ai'
 lua require'user.autocmds'
 lua require'user.buffers'
 lua require'user.cmp'
