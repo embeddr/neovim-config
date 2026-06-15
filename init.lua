@@ -6,12 +6,11 @@ if not vim.pack then
   error("This configuration requires Neovim 0.12 or newer for vim.pack")
 end
 
--- vim.pack --------------------------------------------------------------------
-
 local gh = function(repo)
   return "https://github.com/" .. repo
 end
 
+-- Autocommand to invoke TSUpdate on treesitter install/update
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     local spec = ev.data and ev.data.spec
@@ -27,38 +26,30 @@ vim.api.nvim_create_autocmd("PackChanged", {
 })
 
 vim.pack.add({
-  -- Mini
-  { src = gh("echasnovski/mini.nvim"), version = "stable" },
-
   -- LSP
-  -- Mason provides automatic download and setup of LSP servers
   { src = gh("williamboman/mason.nvim") },
   { src = gh("williamboman/mason-lspconfig.nvim") },
-  -- TODO: Update config to support newer version
-  { src = gh("neovim/nvim-lspconfig"), version = "v2.5.0" },
+  { src = gh("neovim/nvim-lspconfig") },
 
   -- Autocompletion
   { src = gh("hrsh7th/nvim-cmp") },
   { src = gh("hrsh7th/cmp-nvim-lsp") },
   { src = gh("hrsh7th/cmp-path") },
 
-  -- Treesitter
+  -- Improved syntax highlighting and awareness
   { src = gh("nvim-treesitter/nvim-treesitter"), version = "master" },
 
   -- OSC52 for remote yank
   -- Neovim 0.10+ has native OSC52 support, so explore removing this sometime
   { src = gh("ojroques/nvim-osc52") },
 
-  -- Ripgrep
-  -- Very fast grep tool written in rust
-  -- Note: Ripgrep must be installed separately; can use cargo
+  -- Fast search
   { src = gh("jremmen/vim-ripgrep") },
 
   -- Display buffer info in tabline
   { src = gh("akinsho/bufferline.nvim"), version = vim.version.range("*") },
 
-  -- Buffer deletion helpers
-  -- Prevents issues like windows closing when buffers are deleted
+  -- Prevent issues like windows closing when buffers are deleted
   { src = gh("kazhala/close-buffers.nvim") },
 
   -- Status bar and window bar plugins
@@ -70,10 +61,10 @@ vim.pack.add({
   { src = gh("rachartier/tiny-inline-diagnostic.nvim") },
 
   -- Telescope
-  -- Note: Ripgrep must be installed separately; can use cargo
-  -- Note: File browser optionally uses fd, which must be installed separately
+  -- Note: Ripgrep must be installed separately
+  -- Note: File browser optionally uses fd
   { src = gh("nvim-lua/plenary.nvim") },
-  { src = gh("nvim-telescope/telescope.nvim") }, -- { version = "0.1.0" }
+  { src = gh("nvim-telescope/telescope.nvim") },
   { src = gh("nvim-telescope/telescope-file-browser.nvim") },
 
   -- Floating terminal
@@ -83,10 +74,9 @@ vim.pack.add({
   -- Hex editor
   { src = gh("RaafatTurki/hex.nvim") },
 
-  -- Notify
+  -- Notification box
   { src = gh("rcarriga/nvim-notify") },
 
-  -- Git helpers by tpope
   -- General git command support
   { src = gh("tpope/vim-fugitive") },
 
@@ -94,23 +84,21 @@ vim.pack.add({
   { src = gh("tpope/vim-rhubarb") },
   { src = gh("shumphrey/fugitive-gitlab.vim") },
 
-  -- Abolish
-  -- Helper for abbreviation, substitution, and coercion
+  -- Helpers for abbreviation, substitution, and coercion
   { src = gh("tpope/vim-abolish") },
 
-  -- GitGutter
-  -- Shows git changes in column to the left of line numbers
+  -- Show git changes in column to the left of line numbers
   { src = gh("airblade/vim-gitgutter") },
 
-  -- Closer
-  -- Plugin for conservative bracket closing (inserts on enter only)
+  -- Conservative bracket closing (inserts on enter only)
   { src = gh("rstacruz/vim-closer") },
 
   -- Startify
-  -- Vim startup menu improvements (recent files, sessions, etc.)
   { src = gh("mhinz/vim-startify") },
 
-  -- Vim-Smoothie
+  -- Highlight trailing spaces
+  { src = gh("nvim-mini/mini.trailspace") },
+
   -- Smooth scrolling with default Vim movement
   { src = gh("psliwka/vim-smoothie") },
 
@@ -172,7 +160,6 @@ vim.keymap.set("n", "<leader>b", "<cmd>GBrowse<CR>")
 vim.keymap.set("x", "<leader>b", ":GBrowse<CR>")
 
 -- Enable escape to exit terminal mode
--- TODO: Put this in custom binding for floaterm?
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 
 -- Have shift-tab unindent in insert mode

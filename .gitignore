@@ -1,3 +1,4 @@
 .netrwhist
 *.luarc.json
 *.DS_Store
+nvim.log

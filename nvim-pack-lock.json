@@ -49,19 +49,17 @@
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/williamboman/mason.nvim"
     },
-    "mini.nvim": {
-      "rev": "a995fe9cd4193fb492b5df69175a351a74b3d36b",
-      "src": "https://github.com/echasnovski/mini.nvim",
-      "version": "'stable'"
+    "mini.trailspace": {
+      "rev": "22653218f1aedc9bf306c8b4e8ec2c8a575f6fae",
+      "src": "https://github.com/nvim-mini/mini.trailspace"
     },
     "nvim-cmp": {
       "rev": "a1d504892f2bc56c2e79b65c6faded2fd21f3eca",
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "5bfcc89fd155b4ffc02d18ab3b7d19c2d4e246a7",
-      "src": "https://github.com/neovim/nvim-lspconfig",
-      "version": "'v2.5.0'"
+      "rev": "a683e0ddf0cf64c6cd689e18ffb480ade3c162b7",
+      "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
       "rev": "f5eba192f39b453675d115351808bd51276d9de5",

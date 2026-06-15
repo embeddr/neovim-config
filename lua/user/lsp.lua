@@ -1,72 +1,57 @@
 -- Make sure lspconfig is successfully setup before proceeding
-local status_ok, _ = pcall(require, 'lspconfig')
-if not status_ok then
-  print("failed to setup lspconfig")
+local ok, _ = pcall(require, 'lspconfig')
+if not ok then
+  vim.notify('failed to load nvim-lspconfig', vim.log.levels.ERROR)
   return
 end
 
-require'mason'.setup {
-  log_level = vim.log.levels.ERROR
-}
+require('mason').setup({
+  log_level = vim.log.levels.ERROR,
+})
 
-require'mason-lspconfig'.setup {
+require('mason-lspconfig').setup({
   automatic_installation = true,
-}
+})
 
-local navic = require'nvim-navic'
+local navic_ok, navic = pcall(require, 'nvim-navic')
 
--- Mappings
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
---vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev({float = false}) end, opts)
-vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({float = false}) end, opts)
+-- Global diagnostic mappings
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.goto_prev({ float = false })
+end, { noremap = true, silent = true })
 
--- Function to be invoked when LSP client attaches to the current buffer
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.goto_next({ float = false })
+end, { noremap = true, silent = true })
+
 local on_attach = function(client, bufnr)
-  -- Mappings
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  -- Attach navic if capable (provides code context in winbar)
-  if client.server_capabilities.documentSymbolProvider then
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
+  vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+
+  -- Attach navic if available and supported by the server
+  if navic_ok and client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
 end
 
--- Register on_attach function for desired servers
-local lspconfig = require'lspconfig'
-local capabilities = vim.tbl_deep_extend(
-  'force',
-  lspconfig.util.default_config,
-  require'cmp_nvim_lsp'.default_capabilities()
-)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig['clangd'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { "c", "cpp" }, -- exclude proto, which is enabled by default
-}
-lspconfig['rust_analyzer'].setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
-lspconfig['jsonls'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
--- NOTE: I ran into issues trying to convert everything else to use
--- this new API, so I'm only doing it for lua_ls for now...
-vim.lsp.config('lua_ls', {
-    on_attach = on_attach,
-    capabilities = capabilities,
+local servers = {
+  clangd = {
+    filetypes = { 'c', 'cpp' }, -- exclude proto, which clangd enables by default
+  },
+  rust_analyzer = {},
+  jsonls = {},
+  pyright = {},
+  lua_ls = {
     settings = {
       Lua = {
         runtime = {
@@ -74,17 +59,21 @@ vim.lsp.config('lua_ls', {
         },
         diagnostics = {
           globals = { 'vim' },
-          disable = { "missing-fields" },
+          disable = { 'missing-fields' },
         },
         workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
+          library = vim.api.nvim_get_runtime_file('', true),
           checkThirdParty = false,
         },
       },
     },
-})
-lspconfig['pyright'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+  },
 }
 
+for name, config in pairs(servers) do
+  config.on_attach = on_attach
+  config.capabilities = capabilities
+
+  vim.lsp.config(name, config)
+  vim.lsp.enable(name)
+end
