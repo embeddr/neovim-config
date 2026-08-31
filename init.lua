@@ -37,7 +37,7 @@ vim.pack.add({
   { src = gh("hrsh7th/cmp-path") },
 
   -- Improved syntax highlighting and awareness
-  { src = gh("nvim-treesitter/nvim-treesitter"), version = "master" },
+  { src = gh("nvim-treesitter/nvim-treesitter"), version = "main" },
 
   -- OSC52 for remote yank
   -- Neovim 0.10+ has native OSC52 support, so explore removing this sometime
@@ -55,7 +55,7 @@ vim.pack.add({
   -- Status bar and window bar plugins
   { src = gh("nvim-lualine/lualine.nvim") },
   { src = gh("SmiteshP/nvim-navic") },
-  { src = gh("kyazdani42/nvim-web-devicons") },
+  { src = gh("nvim-tree/nvim-web-devicons") },
 
   -- Clean up inline diagnostics
   { src = gh("rachartier/tiny-inline-diagnostic.nvim") },

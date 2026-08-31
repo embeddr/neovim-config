@@ -19,6 +19,9 @@ floaterm.setup {
       map("n", "-", function()
         floaterm_api.cycle_term_bufs "prev"
       end)
+      -- Disable ctrl-j/ctrl-k down/up scroll
+      vim.keymap.del({ "n", "t" }, "<C-j>", { buffer = bufnr })
+      vim.keymap.del({ "n", "t" }, "<C-k>", { buffer = bufnr })
       -- Remap leader-N to jump to the Nth terminal
       -- This unfortunately requires poking around into the guts of the floaterm plugin a
       -- bit, so there's a decent chance that this will break at some point in the future.

@@ -46,10 +46,10 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local servers = {
   clangd = {
+    cmd = { '/usr/bin/clangd-19' },
     filetypes = { 'c', 'cpp' }, -- exclude proto, which clangd enables by default
   },
   rust_analyzer = {},
-  jsonls = {},
   pyright = {},
   lua_ls = {
     settings = {
