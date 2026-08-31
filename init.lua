@@ -6,12 +6,18 @@ if not vim.pack then
   error("This configuration requires Neovim 0.12 or newer for vim.pack")
 end
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local gh = function(repo)
   return "https://github.com/" .. repo
 end
 
 -- Autocommand to invoke TSUpdate on treesitter install/update
+local pack_group = vim.api.nvim_create_augroup("user_pack_hooks", { clear = true })
+
 vim.api.nvim_create_autocmd("PackChanged", {
+  group = pack_group,
   callback = function(ev)
     local spec = ev.data and ev.data.spec
     if not spec or spec.name ~= "nvim-treesitter" then
@@ -19,7 +25,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end
 
     if ev.data.kind == "install" or ev.data.kind == "update" then
-      vim.cmd.packadd("nvim-treesitter")
+      if not ev.data.active then
+        vim.cmd.packadd("nvim-treesitter")
+      end
       vim.cmd.TSUpdate()
     end
   end,
@@ -47,7 +55,7 @@ vim.pack.add({
   { src = gh("jremmen/vim-ripgrep") },
 
   -- Display buffer info in tabline
-  { src = gh("akinsho/bufferline.nvim"), version = vim.version.range("*") },
+  { src = gh("akinsho/bufferline.nvim") },
 
   -- Prevent issues like windows closing when buffers are deleted
   { src = gh("kazhala/close-buffers.nvim") },
@@ -107,7 +115,6 @@ vim.pack.add({
 
   -- Color Schemes
   { src = gh("sainnhe/everforest") },
-  { src = gh("morhetz/gruvbox") },
   { src = gh("folke/tokyonight.nvim") },
 }, { confirm = false })
 
@@ -142,36 +149,38 @@ local function smoothie(keys)
 end
 
 -- Use ctrl-j/k to scroll up/down
-vim.keymap.set("n", "<C-k>", smoothie("<C-U>"), { silent = true })
-vim.keymap.set("n", "<C-j>", smoothie("<C-D>"), { silent = true })
+vim.keymap.set("n", "<C-k>", smoothie("<C-U>"), { desc = "Scroll up", silent = true })
+vim.keymap.set("n", "<C-j>", smoothie("<C-D>"), { desc = "Scroll down", silent = true })
 
 -- Unmap q to prevent recording
-vim.keymap.set({ "n", "x", "s", "o" }, "q", "<Nop>")
+vim.keymap.set({ "n", "x", "s", "o" }, "q", "<Nop>", { desc = "Disable macro recording" })
 
--- Toggle line wrap on the current buffer
-vim.keymap.set("n", "<leader>w", "<cmd>set wrap!<CR>")
+-- Toggle line wrap in the current window
+vim.keymap.set("n", "<leader>w", function()
+  vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle line wrap" })
 
 -- Go to previous/next buffer
-vim.keymap.set("n", "-", "<cmd>bprev<CR>")
-vim.keymap.set("n", "=", "<cmd>bnext<CR>")
+vim.keymap.set("n", "-", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "=", "<cmd>bnext<CR>", { desc = "Next buffer" })
 
 -- Get link to open file/selection on GitHub
-vim.keymap.set("n", "<leader>b", "<cmd>GBrowse<CR>")
-vim.keymap.set("x", "<leader>b", ":GBrowse<CR>")
+vim.keymap.set("n", "<leader>b", "<cmd>GBrowse<CR>", { desc = "Open file in GitHub or GitLab" })
+vim.keymap.set("x", "<leader>b", ":GBrowse<CR>", { desc = "Open selection in GitHub or GitLab" })
 
 -- Enable escape to exit terminal mode
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 -- Have shift-tab unindent in insert mode
-vim.keymap.set("i", "<S-Tab>", "<C-d>")
+vim.keymap.set("i", "<S-Tab>", "<C-d>", { desc = "Unindent" })
 
 -- Use ctrl-j/k to navigate autocompletion menus
 vim.keymap.set("i", "<C-j>", function()
   return vim.fn.pumvisible() == 1 and "<C-n>" or "<C-j>"
-end, { expr = true })
+end, { desc = "Select next completion item", expr = true })
 vim.keymap.set("i", "<C-k>", function()
   return vim.fn.pumvisible() == 1 and "<C-p>" or "<C-k>"
-end, { expr = true })
+end, { desc = "Select previous completion item", expr = true })
 
 -- Source other config files  --------------------------------------------------
 
