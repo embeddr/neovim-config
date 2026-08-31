@@ -6,9 +6,6 @@ if not vim.pack then
   error("This configuration requires Neovim 0.12 or newer for vim.pack")
 end
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local gh = function(repo)
   return "https://github.com/" .. repo
 end
@@ -95,8 +92,8 @@ vim.pack.add({
   -- Helpers for abbreviation, substitution, and coercion
   { src = gh("tpope/vim-abolish") },
 
-  -- Show git changes in column to the left of line numbers
-  { src = gh("airblade/vim-gitgutter") },
+  -- Show and manage git changes in the sign column
+  { src = gh("lewis6991/gitsigns.nvim") },
 
   -- Conservative bracket closing (inserts on enter only)
   { src = gh("rstacruz/vim-closer") },
@@ -197,6 +194,7 @@ require("user.autocmds")
 require("user.buffers")
 require("user.cmp")
 require("user.filetypes")
+require("user.git")
 require("user.lsp")
 require("user.misc_plugins")
 require("user.options")
