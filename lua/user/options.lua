@@ -30,6 +30,7 @@ o.hidden = true                        -- Allow buffers to remain open in the ba
 o.mouse = 'a'                          -- Enable mouse in all modes
 
 -- Note: install xclip (or similar) for local clipboard support
+vim.g.clipboard = "osc52"
 o.clipboard:append('unnamedplus')
 
 -- Offsets

@@ -11,7 +11,7 @@ gitsigns.setup({
       if vim.wo.diff then
         vim.cmd.normal({ "]h", bang = true })
       else
-        gitsigns.nav_hunk("next")
+        gitsigns.nav_hunk("next", { target = "all" })
       end
     end, "Next git hunk")
 
@@ -20,7 +20,7 @@ gitsigns.setup({
       if vim.wo.diff then
         vim.cmd.normal({ "[h", bang = true })
       else
-        gitsigns.nav_hunk("prev")
+        gitsigns.nav_hunk("prev", { target = "all"})
       end
     end, "Previous git hunk")
 
@@ -31,12 +31,17 @@ gitsigns.setup({
     end, "Stage selected git lines")
 
     -- Reset hunk
-    map("n", "<leader>gu", gitsigns.reset_hunk, "Undo git hunk")
-    map("x", "<leader>gu", function()
+    map("n", "<leader>gr", gitsigns.reset_hunk, "Reset git hunk")
+    map("x", "<leader>gr", function()
       gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
     end, "Undo selected git lines")
 
-    -- Preview hunk (before/after comparison)
-    map("n", "<leader>gp", gitsigns.preview_hunk, "Preview git hunk")
+    -- Preview hunk (diff)
+    map("n", "<leader>gd", gitsigns.preview_hunk, "Preview git hunk")
+
+    -- Stage all hunks in current buffer
+    vim.keymap.set("n", "<leader>ga", function()
+      require("gitsigns").stage_buffer()
+    end, { desc = "Git: stage current file" })
   end,
 })

@@ -24,11 +24,46 @@ vim.keymap.set('n', ']d', function()
   vim.diagnostic.goto_next({ float = false })
 end, { noremap = true, silent = true })
 
+-- Resolve real paths where possible
+local function realpath_locations(opts)
+  for _, item in ipairs(opts.items) do
+    local path = item.filename
+    if not path and item.bufnr and item.bufnr > 0 then
+      path = vim.api.nvim_buf_get_name(item.bufnr)
+    end
+
+    local real = path and vim.uv.fs_realpath(path)
+    if real then
+      -- Neovim reuses buffers for the same inode, even under another name.
+      -- locations_to_items may already have created one for the symlink.
+      local bufnr = vim.fn.bufadd(real)
+      if vim.api.nvim_buf_get_name(bufnr) ~= real then
+        vim.api.nvim_buf_set_name(bufnr, real)
+      end
+      item.filename = real
+      item.bufnr = bufnr
+    end
+  end
+
+  vim.fn.setqflist({}, " ", opts)
+  if #opts.items == 1 then
+    vim.cmd("cfirst")
+  else
+    vim.cmd("copen")
+  end
+end
+
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set("n", "gd", function()
+    vim.lsp.buf.definition({ on_list = realpath_locations })
+  end, vim.tbl_extend('force', opts, { desc = "Go to definition (resolve symlinks)" }))
+
+  vim.keymap.set("n", "gD", function()
+    vim.lsp.buf.declaration({ on_list = realpath_locations })
+  end, vim.tbl_extend('force', opts, { desc = "Go to declaration (resolve symlinks)" }))
+
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
   vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
   vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
